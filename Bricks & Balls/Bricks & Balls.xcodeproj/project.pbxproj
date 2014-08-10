@@ -86,6 +86,7 @@
 		274C7AE019926239002AA195 = {
 			isa = PBXGroup;
 			children = (
+				27C31240199506E3005C365C /* Models */,
 				274C7B1B19926290002AA195 /* Controllers */,
 				274C7AF219926239002AA195 /* Bricks & Balls */,
 				274C7B0B19926239002AA195 /* Bricks & BallsTests */,
@@ -159,8 +160,6 @@
 			children = (
 				274C7B1C199262B4002AA195 /* BABGameBoardViewController.h */,
 				274C7B1D199262B4002AA195 /* BABGameBoardViewController.m */,
-				274C7B621993E5DD002AA195 /* BABLevelData.h */,
-				274C7B631993E5DD002AA195 /* BABLevelData.m */,
 				274C7B5D1993B99F002AA195 /* Views */,
 			);
 			name = Controllers;
@@ -173,6 +172,15 @@
 				274C7B5F1993B9E9002AA195 /* BABHeaderView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		27C31240199506E3005C365C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				274C7B621993E5DD002AA195 /* BABLevelData.h */,
+				274C7B631993E5DD002AA195 /* BABLevelData.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

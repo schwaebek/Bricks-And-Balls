@@ -9,5 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface BABLevelData : NSObject
++ (BABLevelData *) mainData;
+
+@property (nonatomic) int topScore;
+@property (nonatomic) int currentLevel;
+
+
+-(NSDictionary *) levelInfo;
 
 @end

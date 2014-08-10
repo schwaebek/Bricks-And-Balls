@@ -8,12 +8,20 @@
 
 #import "BABGameBoardViewController.h"
 #import "BABHeaderView.h"
-
+#import "BABLevelData.h"
 // when gameover clear bricks and show start button
 // create new class called "BABlevelData" as a subclass of NSObject
 // make a method that will drop a UIView (gravity) from a broken brick like a powerup
 //listen for it to collide with paddle
 //randomly change size of paddle when powerup hit paddle
+
+
+
+// create 5 different types of power ups (paddle size big, paddle size small, multi ball, ball size big, ball size small) - the power ups should look different
+// set topScore for your singleton
+// change the look of your game with images or colors (**make it unique to you**)
+// if game over set currentLevel to 0
+
 
 
 
@@ -40,6 +48,7 @@
     UIButton * startButton;
     UIButton * resetButton;
     UIView * powerUp;
+    UIView * powerUpMulti;
     //    UIView * brick;
     // int lives;
     // int score;
@@ -74,7 +83,6 @@
         [animator addBehavior:gravityBehavior];
         
         collisionBehavior = [[UICollisionBehavior alloc]init];
-        
         [collisionBehavior addBoundaryWithIdentifier:@"floor" fromPoint:CGPointMake(0, SCREEN_HEIGHT + 20) toPoint:CGPointMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
         [collisionBehavior addBoundaryWithIdentifier:@"left wall" fromPoint:CGPointMake(0, 0) toPoint:CGPointMake(0, SCREEN_HEIGHT)];
         [collisionBehavior addBoundaryWithIdentifier:@"right wall" fromPoint:CGPointMake(SCREEN_WIDTH, 0) toPoint:CGPointMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -127,11 +135,9 @@
     collisionPower.collisionDelegate= self;
     powerUp.layer.cornerRadius = 12.5;
     powerUp.backgroundColor = [UIColor yellowColor];
-    
     [self.view addSubview:powerUp];
     
     [gravityBehavior addItem:powerUp];
-    
     [collisionPower addItem:powerUp];
     [collisionPower addItem:paddle];
     [animator addBehavior:gravityBehavior];
@@ -140,6 +146,25 @@
     
     
     
+}
+-(void)powerUpMultiBall:(UIView *)brick
+{
+    // position power up and activate when brick breaks
+    // create powerUp
+    // refer to reset bricks method and gravity behavior
+    
+    powerUpMulti = [[UIView alloc]initWithFrame:CGRectMake(brick.center.x, brick.center.y, 40, 40)];
+    collisionPower.collisionDelegate= self;
+    powerUpMulti.layer.cornerRadius = 20.0;
+    powerUpMulti.backgroundColor = [UIColor magentaColor];
+    [self.view addSubview:powerUpMulti];
+    
+    [gravityBehavior addItem:powerUpMulti];
+    [collisionPower addItem:powerUpMulti];
+    [collisionPower addItem:paddle];
+    [animator addBehavior:gravityBehavior];
+    [animator addBehavior:collisionPower];
+
 }
 -(void)resetGame
 {
@@ -170,8 +195,8 @@
     }
     [bricks removeAllObjects];
     
-    int colCount = 7;
-    int rowCount = 4;
+    int colCount = [[[BABLevelData mainData] levelInfo][@"cols"] intValue];
+    int rowCount = [[[BABLevelData mainData] levelInfo][@"rows"] intValue];
     int brickSpacing = 8;
     
     for (int col = 0; col < colCount; col++)
@@ -183,7 +208,7 @@
             
             float x = brickSpacing + (width + brickSpacing) * col;
             float y = brickSpacing + (height + brickSpacing) * row +30;
-            brick = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
+            UIView * brick = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
             
             CGFloat hue = (arc4random() % 256 / 256.0);
             CGFloat saturation = (arc4random() % 128 / 256.0) + 0.5;
@@ -196,10 +221,6 @@
             
             [self.view addSubview:brick];
             [bricks addObject:brick];
-            UIView * brick = [[UIView alloc]initWithFrame:CGRectMake(x, y, width, height)];
-            brick.backgroundColor = [UIColor lightGrayColor];
-            [self.view addSubview:brick];
-            [bricks addObject:brick];
             
             [collisionBehavior addItem:brick];
             [brickItemBehavior addItem:brick];
@@ -207,20 +228,17 @@
         }
     }
     
-}
-
--(void)createCollisionMethod
-{
+//}
+//
+//-(void)createCollisionMethod
+//{
     
     
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     [super viewWillAppear:animated];
-    
-    
     attachmentBehavior = [[UIAttachmentBehavior alloc]initWithItem:paddle attachedToAnchor: paddle.center];
     [animator addBehavior:attachmentBehavior];
     
@@ -327,6 +345,7 @@
             paddle.frame = frame;
             
         };
+        
         return;
     }
 
@@ -337,8 +356,8 @@
         {
             headerView.score +=100;
             
-            int random = arc4random_uniform(8);
-            if (random == 7)
+            int random = arc4random_uniform(3);
+            if (random == 3)
             {
                 [self powerUpWithBrick:brick];
             }
@@ -356,6 +375,15 @@
                 [brick removeFromSuperview];
                 [bricks removeObjectIdenticalTo:brick];
             }];
+            
+            if(bricks.count == 0)
+            {
+                [collisionBehavior removeItem:ball];
+                [ball removeFromSuperview];
+                
+                [BABLevelData mainData].currentLevel++;
+                [self showStartButton];
+            }
             
         }
     }
