@@ -7,6 +7,7 @@
 //
 
 #import "BABHeaderView.h"
+#import "BABLevelData.h"
 
 
 @implementation BABHeaderView
@@ -34,12 +35,13 @@
         self.score = 0;
     }
     return self;
-
+    
 }
 
 -(void) setScore:(int)score
 {
     _score = score;
+    if([BABLevelData mainData].topScore < score) [BABLevelData mainData].topScore = score;
     scoreLabel.text = [NSString stringWithFormat:@"Score : %d",score];
 }
 -(void) setLives:(int)lives

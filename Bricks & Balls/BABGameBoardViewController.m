@@ -38,6 +38,8 @@
     UICollisionBehavior * collisionBehavior;
     UIAttachmentBehavior * attachmentBehavior;
     UICollisionBehavior * collisionPower;
+    UICollisionBehavior * powerUpCollisonBehavior;
+    
     
     NSMutableArray * bricks;
     UILabel * scoreLabel;
@@ -48,7 +50,11 @@
     UIButton * startButton;
     UIButton * resetButton;
     UIView * powerUp;
-    UIView * powerUpMulti;
+    
+    NSMutableArray * balls;
+    
+    
+    
     //    UIView * brick;
     // int lives;
     // int score;
@@ -62,6 +68,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
+        
         
         bricks =[@[] mutableCopy];
         
@@ -96,6 +104,10 @@
         
         collisionPower = [[UICollisionBehavior alloc]init];
         
+        
+        powerUpCollisonBehavior = [[UICollisionBehavior alloc] init];
+        powerUpCollisonBehavior.collisionDelegate = self;
+        [animator addBehavior:powerUpCollisonBehavior];
         
         // Custom initialization
     }
@@ -136,6 +148,7 @@
     powerUp.layer.cornerRadius = 12.5;
     powerUp.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:powerUp];
+    powerUp.tag = arc4random_uniform(4);
     
     [gravityBehavior addItem:powerUp];
     [collisionPower addItem:powerUp];
@@ -144,27 +157,6 @@
     [animator addBehavior:collisionPower];
     
     
-    
-    
-}
--(void)powerUpMultiBall:(UIView *)brick
-{
-    // position power up and activate when brick breaks
-    // create powerUp
-    // refer to reset bricks method and gravity behavior
-    
-    powerUpMulti = [[UIView alloc]initWithFrame:CGRectMake(brick.center.x, brick.center.y, 40, 40)];
-    collisionPower.collisionDelegate= self;
-    powerUpMulti.layer.cornerRadius = 20.0;
-    powerUpMulti.backgroundColor = [UIColor magentaColor];
-    [self.view addSubview:powerUpMulti];
-    
-    [gravityBehavior addItem:powerUpMulti];
-    [collisionPower addItem:powerUpMulti];
-    [collisionPower addItem:paddle];
-    [animator addBehavior:gravityBehavior];
-    [animator addBehavior:collisionPower];
-
 }
 -(void)resetGame
 {
@@ -228,10 +220,10 @@
         }
     }
     
-//}
-//
-//-(void)createCollisionMethod
-//{
+    //}
+    //
+    //-(void)createCollisionMethod
+    //{
     
     
 }
@@ -267,7 +259,7 @@
         
         if (headerView.lives > 0)
         {
-            [self createBall];
+        [self createBall];
         } else {
             
             // need to call show start button
@@ -283,6 +275,7 @@
 // remove all bricks
 
 // create the start button
+
 -(void)showStartButton
 {
     for (UIView * brick in bricks)
@@ -300,9 +293,6 @@
     startButton.backgroundColor = [UIColor grayColor];
     startButton.layer.cornerRadius = 50;
     [self.view addSubview:startButton];
-    
-    
-    
     
 }
 
@@ -330,7 +320,17 @@
         [powerUp removeFromSuperview];
         powerUp = nil;
         
-        
+        switch (powerUp.tag)
+        {
+            case 0:
+            {
+                CGRect frame = paddle.frame;
+                frame.size.width = (frame.size.width > 40) ? frame.size.width -20:frame.size.width;
+                paddle.frame = frame;
+                
+            }
+                break;
+                       }
         [UIView animateWithDuration:0.3 animations:^{
             powerUp.alpha = 0;
         } completion:^(BOOL finished) {
@@ -348,7 +348,7 @@
         
         return;
     }
-
+    
     
     for (UIView * brick in [bricks copy])
     {
@@ -356,8 +356,8 @@
         {
             headerView.score +=100;
             
-            int random = arc4random_uniform(3);
-            if (random == 3)
+            int random = arc4random_uniform(2);
+            if (random == 1)
             {
                 [self powerUpWithBrick:brick];
             }
@@ -386,7 +386,10 @@
             }
             
         }
-    }
+    };
+    return;
+    
+    
 }
 
 -(void)createBall
@@ -402,6 +405,7 @@
     UIPushBehavior * pushBehavior = [[UIPushBehavior alloc] initWithItems:@[ball] mode:UIPushBehaviorModeInstantaneous];
     pushBehavior.pushDirection = CGVectorMake(0.05, -0.05);
     [animator addBehavior:pushBehavior];
+    
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
