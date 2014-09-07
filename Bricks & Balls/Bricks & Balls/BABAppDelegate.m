@@ -8,7 +8,7 @@
 
 #import "BABAppDelegate.h"
 #import "BABGameBoardViewController.h"
-
+#import <Crashlytics/Crashlytics.h>
 @implementation BABAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

@@ -9,6 +9,7 @@
 #import "BABGameBoardViewController.h"
 #import "BABHeaderView.h"
 #import "BABLevelData.h"
+#import <Crashlytics/Crashlytics.h>
 // when gameover clear bricks and show start button
 // create new class called "BABlevelData" as a subclass of NSObject
 // make a method that will drop a UIView (gravity) from a broken brick like a powerup
@@ -119,7 +120,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [Crashlytics startWithAPIKey:@"d4241c4d45f8f0eef0a5b66690fd71ce3f76643a"];
     paddle = [[UIView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 100) /2.0, SCREEN_HEIGHT - 10, 100, 4)];
     paddle.backgroundColor = [UIColor darkGrayColor];
     [self.view addSubview:paddle];
@@ -292,6 +293,7 @@
     [startButton addTarget:self action:@selector(startGame) forControlEvents:UIControlEventTouchUpInside];
     startButton.backgroundColor = [UIColor grayColor];
     startButton.layer.cornerRadius = 50;
+    
     [self.view addSubview:startButton];
     
 }

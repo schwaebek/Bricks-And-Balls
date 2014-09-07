@@ -10,29 +10,29 @@
 	<string>Bricks &amp; Balls</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2D4FD6E1-C52F-434B-9DD8-AAA9E5D825BF</key>
+		<key>07EE25E070BE569CAD122F3B01451CBAC8C1B0D1</key>
 		<string>https://github.com/schwaebek/Bricks-And-Balls.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Bricks &amp; Balls/Bricks &amp; Balls.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2D4FD6E1-C52F-434B-9DD8-AAA9E5D825BF</key>
+		<key>07EE25E070BE569CAD122F3B01451CBAC8C1B0D1</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/schwaebek/Bricks-And-Balls.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2D4FD6E1-C52F-434B-9DD8-AAA9E5D825BF</string>
+	<string>07EE25E070BE569CAD122F3B01451CBAC8C1B0D1</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2D4FD6E1-C52F-434B-9DD8-AAA9E5D825BF</string>
+			<string>07EE25E070BE569CAD122F3B01451CBAC8C1B0D1</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Bricks-And-Balls</string>
 		</dict>

@@ -22,6 +22,7 @@
 		274C7B1E199262B4002AA195 /* BABGameBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C7B1D199262B4002AA195 /* BABGameBoardViewController.m */; };
 		274C7B601993B9E9002AA195 /* BABHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C7B5F1993B9E9002AA195 /* BABHeaderView.m */; };
 		274C7B641993E5DD002AA195 /* BABLevelData.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C7B631993E5DD002AA195 /* BABLevelData.m */; };
+		275BF7B819B773E20043B86E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 275BF7B719B773E20043B86E /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		274C7B5F1993B9E9002AA195 /* BABHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BABHeaderView.m; sourceTree = "<group>"; };
 		274C7B621993E5DD002AA195 /* BABLevelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BABLevelData.h; sourceTree = "<group>"; };
 		274C7B631993E5DD002AA195 /* BABLevelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BABLevelData.m; sourceTree = "<group>"; };
+		275BF7B719B773E20043B86E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 			files = (
 				274C7AEF19926239002AA195 /* CoreGraphics.framework in Frameworks */,
 				274C7AF119926239002AA195 /* UIKit.framework in Frameworks */,
+				275BF7B819B773E20043B86E /* Crashlytics.framework in Frameworks */,
 				274C7AED19926239002AA195 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,6 +89,7 @@
 		274C7AE019926239002AA195 = {
 			isa = PBXGroup;
 			children = (
+				275BF7B719B773E20043B86E /* Crashlytics.framework */,
 				27C31240199506E3005C365C /* Models */,
 				274C7B1B19926290002AA195 /* Controllers */,
 				274C7AF219926239002AA195 /* Bricks & Balls */,
@@ -193,6 +197,7 @@
 				274C7AE519926239002AA195 /* Sources */,
 				274C7AE619926239002AA195 /* Frameworks */,
 				274C7AE719926239002AA195 /* Resources */,
+				275BF7B619B772A20043B86E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -273,6 +278,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		275BF7B619B772A20043B86E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run d4241c4d45f8f0eef0a5b66690fd71ce3f76643a 7846a224bd33e6f8a341f7d445d3c27f2cf2837ec2d33f5484b6ab61161fbf90";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		274C7AE519926239002AA195 /* Sources */ = {
@@ -400,6 +421,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bricks & Balls/Bricks & Balls-Prefix.pch";
 				INFOPLIST_FILE = "Bricks & Balls/Bricks & Balls-Info.plist";
@@ -413,6 +438,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bricks & Balls/Bricks & Balls-Prefix.pch";
 				INFOPLIST_FILE = "Bricks & Balls/Bricks & Balls-Info.plist";
